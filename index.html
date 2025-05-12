@@ -76,6 +76,7 @@
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Responsive Noise-Relaying Diffusion Policy: <span style="color: #4da2e4; font-weight: bold;">Responsive and Efficient</span> Visuomotor Control</h1>
           <h4 class="is-size-4"><span style="color:crimson">Transactions on Machine Learning Research (TMLR) 2025</span></h4>
+          <h4 class="is-size-4">ICLR 2025 Generative Models for Robot Workshop</h4>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://zhuoqun-chen.github.io">Zhuoqun Chen*</a><sup>1</sup>,</span>
@@ -159,7 +160,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-three-quarters">
-        <div class="media" style="display: flex; gap: 0; justify-content: center; align-items: flex-start;">
+        <div class="media" style="display: flex; gap: 0.5vw; justify-content: center; align-items: flex-start;">
           <div class="content has-text-centered" style="position: relative; width: 50%; margin: 0; padding: 0;">
             <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.5); color: #fff; padding: 0.3em 1em; border-radius: 0.5em; font-size: 1.1em; pointer-events: none; z-index: 2; min-width: 70%; max-width: 90%; white-space: nowrap;">
               Diffusion Policy (DP)
@@ -186,27 +187,23 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="abstract">
   <div class="container is-max-desktop">
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-full-width">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
             Imitation learning is an efficient method for teaching robots a variety of tasks.
             Diffusion Policy, which uses a conditional denoising diffusion process to generate actions, has demonstrated superior performance, particularly in learning from multi-modal demonstrates.
-            However, it relies on executing multiple actions predicted from the same inference step to retain performance and prevent mode bouncing, which limits its responsiveness, as actions are not conditioned on the most recent observations.
-          </p>
-          <p>
+            However, it relies on executing multiple actions to retain performance and prevent mode bouncing, which limits its responsiveness, as actions are not conditioned on the most recent observations.
             To address this, we introduce <span style="color: #4da2e4; font-weight: bold;">Responsive Noise-Relaying Diffusion Policy (RNR-DP)</span>, which maintains a noise-relaying buffer with progressively increasing noise levels and employs a sequential denoising mechanism that generates immediate,
             noise-free actions at the head of the sequence, while appending noisy actions at the tail.
             This ensures that actions are responsive and conditioned on the latest observations, while maintaining motion consistency through the noise-relaying buffer.
             This design enables the handling of tasks requiring responsive control, and accelerates action generation by reusing denoising steps.
-          </p>
-          <p>
             Experiments on response-sensitive tasks demonstrate that, compared to Diffusion Policy, ours achieves 18% improvement in success rate.
-            Further evaluation on regular tasks demonstrates that RNR-DP also exceeds the best acceleration method by 6.9% in success rate, highlighting its computational efficiency advantage in scenarios where responsiveness is less critical.
+            Further evaluation on regular tasks demonstrates that RNR-DP also exceeds the best acceleration method by 6.9%, highlighting its computational efficiency advantage in scenarios where responsiveness is less critical.
           </p>
         </div>
       </div>
@@ -215,7 +212,7 @@
 
     <!-- Method Overview. -->
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-full-width">
         <h2 class="title is-3">Method Overview</h2>
         <div class="content has-text-justified">
           <p>
@@ -224,7 +221,9 @@
             (2) After denoising once, each action in the buffer is denoised for one step, clean action at the buffer's head is removed and executed (<span style="color:#00A651; font-weight: bold;">dequeue</span>).
             (3) The remaining noisy actions are left shifted for one slot and a fully noisy action is appended to the buffer's tail (<span style="color:#a82216; font-weight: bold;">enqueue</span>).
           </p>
-          <img src="./static/assets/method_overview.png" alt="Method overview." class="method-overview"/>
+          <div class="content" style="display: flex; justify-content: center;">
+            <img src="./static/assets/method_overview.png" alt="Method overview." class="method-overview" width="80%" style="margin-top: 20px;"/>
+          </div>
 
         </div>
       </div>
@@ -234,28 +233,28 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="overall-improvement">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Overall Improvement</h2>
-        <div class="content has-text-justified">
-          RNR-DP consistently outperforms Diffusion Policy across all tested scenarios in both state and visual experiments.
-          Specifically, in state experiments, RNR-DP achieves a 15.1% improvement over Diffusion Policy,
-          while in visual experiments, it demonstrates a 24.9% improvement. Overall, RNR-DP surpasses Diffusion Policy by 18.0%.
-          Notably, in the Relocate task, RNR-DP achieves a significant performance boost of 38.6% over Diffusion Policy.
-        </div>
+        <img src="./static/assets/tasks.png" alt="Task Grouping." class="task-grouping" style="margin-top: 24px; margin-bottom: 24px;"/>
         <div class="content" style="display: flex; justify-content: center;">
-          <div style="margin-left: 4vw;">
-            <img src="./static/assets/bars.png" alt="overall improvement." width="60%"/>
+          <div style="margin-left: 5vw;">
+            <img src="./static/assets/bars.png" alt="overall improvement." width="45%"/>
           </div>
+        </div>
+        <div class="content has-text-justified">
+          RNR-DP consistently outperforms DP across all scenarios in both state and visual experiments. Specifically, our method achieves a <span style="color:#a82216; font-weight: bold;">15.1%</span> improvement over DP in state experiments,
+          while in visual experiments, it demonstrates a <span style="color:#a82216; font-weight: bold;">24.9%</span> improvement. Overall, RNR-DP surpasses DP by <span style="color:#a82216; font-weight: bold;">18.0%</span>.
+          Notably, our method achieves huge performance boosts of <span style="color:#a82216; font-weight: bold;">38.6%</span> over DP in the Relocate task.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="qualitative">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
@@ -263,102 +262,146 @@
 
         <!-- Relocate -->
         <h3 class="title is-4"><a href="https://robotics.farama.org/envs/adroit_hand/adroit_relocate/">Adroit: Relocate Task</a></h3>
-        <div class="media">
+        <div class="media" style="display: flex; gap: 1vw; justify-content: center; align-items: flex-start; width: 75%; margin-left: 50%; transform: translateX(-50%);">
           <div class="content has-text-centered">
             <h4 class="title is-5">Diffusion Policy (DP)</h4>
-            <video id="relocate-dp-video" autoplay="" loop controls muted playsinline width="75%">
+            <video id="relocate-dp-video" autoplay="" loop controls muted playsinline width="100%">
               <source src="./static/assets/relocate_dp.mp4" type="video/mp4">
             </video>
           </div>
           <div class="content has-text-centered">
             <h4 class="title is-5">Ours (RNR-DP)</h4>
-            <video id="relocate-rnrdp-video" autoplay="" loop controls muted playsinline width="75%">
+            <video id="relocate-rnrdp-video" autoplay="" loop controls muted playsinline width="100%">
               <source src="./static/assets/relocate_rnrdp.mp4" type="video/mp4">
             </video>
           </div>
         </div>
         <div class="content has-text-justified">
-          <p>
-            Relocating a ball on a desk to the goal region using a dexterous hand is particularly challenging due to the complex dynamics of hand-object interactions,
-            especially when relative displacement may occur during the grasping process.
-            A common failure case of Diffusion Policy is its inability to lift the ball off the table within the maximum episode time due to the ball slipping on the surface or shifting within the fingers.
-            In contrast, under the same initial conditions, our method not only successfully achieves a stable grasp but also smoothly transports the ball to the goal region with minimal delay,
-            demonstrating the advantages of RNR-DP.
-          </p>
+          <div style="display: flex; justify-content: center;">
+            <button class="toggle-key-obs-btn button is-info is-normal" style="margin-bottom: 1em; font-size: 1em;">
+              <span class="icon is-small" style="vertical-align: middle;"><i class="fas fa-hand-point-down"></i></span>
+              <span style="vertical-align: middle;">key observations</span>
+            </button>
+          </div>
+          <div class="key-observations" style="display: none;">
+            <p>
+              Relocating a ball to the goal region using dexterous hands is hard due to complex dynamics of hand-object interactions
+              especially when relative displacement occurs during graspings.
+              A common failure case of DP is its inability to lift the ball off the table due to the shifting within fingers.
+              However, our method smoothly transports the ball to target region with minimal delay.
+            </p>
+          </div>
         </div>
         <!--/ Relocate. -->
 
         <!-- PushChair. -->
         <h3 class="title is-4"><a href="https://sapien.ucsd.edu/challenges/maniskill/#tasks:~:text=Turn%20Faucet-,Push%20Chair,-Open%20Cabinet%20Door">ManiSkill2: PushChair Task</a></h3>
-        <div class="media">
+        <div class="media" style="display: flex; gap: 1vw; justify-content: center; align-items: flex-start; width: 75%; margin-left: 50%; transform: translateX(-50%);">
           <div class="content has-text-centered">
             <h4 class="title is-5">Diffusion Policy (DP)</h4>
-            <video id="pushchair-dp-video" autoplay="" loop controls muted playsinline width="75%">
+            <video id="pushchair-dp-video" autoplay="" loop controls muted playsinline width="100%">
               <source src="./static/assets/push_dp.mp4" type="video/mp4">
             </video>
           </div>
           <div class="content has-text-centered">
             <h4 class="title is-5">Ours (RNR-DP)</h4>
-            <video id="pushchair-rnrdp-video" autoplay="" loop controls muted playsinline width="75%">
+            <video id="pushchair-rnrdp-video" autoplay="" loop controls muted playsinline width="100%">
               <source src="./static/assets/push_rnrdp.mp4" type="video/mp4">
             </video>
           </div>
         </div>
         <div class="content has-text-justified">
-          <p>
-            When Diffusion Policy predicts a sequence of future actions at a given moment, it executes all predicted actions without adjustment.
-            However, if the predicted motion deviates significantly from the target point (red dot),
-            it lacks the ability to correct itself based on the latest observations, ultimately failing to push the chair to the target area.
-            In contrast, our method continuously updates decisions based on the most recent observations, ensuring high precision in guiding the chair toward the target and completing the task efficiently.
-          </p>
+          <div style="display: flex; justify-content: center;">
+            <button class="toggle-key-obs-btn button is-info is-normal" style="margin-bottom: 1em; font-size: 1em;">
+              <span class="icon is-small" style="vertical-align: middle;"><i class="fas fa-hand-point-down"></i></span>
+              <span style="vertical-align: middle;">key observations</span>
+            </button>
+          </div>
+          <div class="key-observations" style="display: none;">
+            <p>
+              After pre-computing a sequence of future actions at a given moment, DP executes all predicted actions without adjustment.
+              But once predictions deviate significantly from target area (🔴), DP lacks ability to correct itself and fails to finish the task.
+              However, our method continuously updates decisions based on latest observations, ensuring high precision in guiding the chairs.
+            </p>
+          </div>
         </div>
         <!--/ PushChair. -->
 
         <!-- PushT. -->
         <h3 class="title is-4"><a href="https://maniskill.readthedocs.io/en/latest/tasks/table_top_gripper/#pusht-v1">ManiSkill3: PushT Task</a></h3>
-        <div class="media">
+        <div class="media" style="display: flex; gap: 1vw; justify-content: center; align-items: flex-start; width: 75%; margin-left: 50%; transform: translateX(-50%);">
           <div class="content has-text-centered">
             <h4 class="title is-5">Diffusion Policy (DP)</h4>
-            <video id="pusht-dp-video" autoplay="" loop controls muted playsinline width="75%">
+            <video id="pusht-dp-video" autoplay="" loop controls muted playsinline width="100%">
               <source src="./static/assets/pusht_dp.mp4" type="video/mp4">
             </video>
           </div>
           <div class="content has-text-centered">
             <h4 class="title is-5">Ours (RNR-DP)</h4>
-            <video id="pusht-rnrdp-video" autoplay="" loop controls muted playsinline width="75%">
+            <video id="pusht-rnrdp-video" autoplay="" loop controls muted playsinline width="100%">
               <source src="./static/assets/pusht_rnrdp.mp4" type="video/mp4">
             </video>
           </div>
         </div>
         <div class="content has-text-justified">
-          <p>
-            Pushing the T-shaped block precisely into the target region with a stick is particularly challenging,
-            as it requires fine control over both position and orientation to prevent unintended rotations or misalignments.
-            Due to its long action horizon, Diffusion Policy often introduces slight misalignments, causing the end-effector to oscillate near the edge in an attempt to correct the placement.
-            In contrast, our method, which employs single-action rollouts, accurately positions the object with precision, ensuring correct alignment.
-          </p>
+          <div style="display: flex; justify-content: center;">
+            <button class="toggle-key-obs-btn button is-info is-normal" style="margin-bottom: 1em; font-size: 1em;">
+              <span class="icon is-small" style="vertical-align: middle;"><i class="fas fa-hand-point-down"></i></span>
+              <span style="vertical-align: middle;">key observations</span>
+            </button>
+          </div>
+          <div class="key-observations" style="display: none;">
+            <p>
+              Pushing T-shaped blocks precisely into target regions requires fine control to prevent unintended misalignments.
+              Due to its long action horizon, DP often introduces slight misalignments, causing the end-effector to oscillate near the edge in an attempt to correct the placement.
+              However, our method accurately positions the object with precision, ensuring correct alignment.
+            </p>
+          </div>
         </div>
         <!--/ PushT. -->
+
+        <script>
+        // Toggle key observations for all tasks
+        document.addEventListener('DOMContentLoaded', function() {
+          var btns = document.querySelectorAll('.toggle-key-obs-btn');
+          var defaultHtml = '<span class="icon is-small" style="vertical-align: middle;"><i class="fas fa-hand-point-down"></i></span> <span style="vertical-align: middle;">key observations</span>';
+          var hideHtml = '<span class="icon is-small" style="vertical-align: middle;"><i class="fas fa-hand-point-up"></i></span> <span style="vertical-align: middle;">hide me</span>';
+          btns.forEach(function(btn) {
+            var obs = btn.parentElement.parentElement.querySelector('.key-observations');
+            btn.innerHTML = defaultHtml;
+            btn.addEventListener('click', function() {
+              if (obs.style.display === 'none') {
+                obs.style.display = 'block';
+                btn.innerHTML = hideHtml;
+              } else {
+                obs.style.display = 'none';
+                btn.innerHTML = defaultHtml;
+              }
+            });
+          });
+        });
+        </script>
 
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="multi-modality">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Our Policy Preserves Multi-modality</h2>
         <div class="content" style="display: flex; justify-content: center;">
-          <div style="margin-left: 4vw;">
+          <div>
             <img src="./static/assets/property_multi_modality.png" alt="overall improvement." width="40%"/>
           </div>
         </div>
         <div class="content has-text-justified">
-          To demonstrate the preservation of multi-modality in practice, we visualize action distributions from a state in the ManiSkill2 StackCube task,using our RNR-DP.
-          We sample 1000 actions from our policy then applies PCA dimensionality reduction for visualization.
-          We use histograms to visualize the discrete relative density of these action samples and use kernel density estimation (KDE) to visualize the estimated probability density function.
+          To demonstrate the preservation of multi-modality in practice, we visualize action distributions from a state in the ManiSkill2 StackCube task.
+          We sample 1000 actions from our policy then apply PCA.
+          We visualize the relative and estimated probability density using histograms and KDE, respectively.
+          The results reveal a multi-modal distribution clearly.
         </div>
       </div>
     </div>
