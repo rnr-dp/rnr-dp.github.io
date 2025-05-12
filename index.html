@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Responsive Noise-Relaying Diffusion Policy generetes responsive actions conditioned on the latest observations.">
+  <meta name="keywords" content="RNRDP, RNR-DP, DP, Diffusion Policy">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RNR-DP: Responsive Noise-Relaying Diffusion Policy</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+  <link rel="icon" href="./static/assets/favicon.ico">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Visualizations
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://rnrdp.github.io">
+            Multi-modality Preservation
+          </a>
+          <a class="navbar-item" href="https://rnrdp.github.io">
+            XXX
+          </a>
+          <a class="navbar-item" href="https://rnrdp.github.io">
+            XXX
+          </a>
+          <a class="navbar-item" href="https://rnrdp.github.io">
+            XXX
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Responsive Noise-Relaying Diffusion Policy: <span style="color: #4da2e4; font-weight: bold;">Responsive and Efficient</span> Visuomotor Control</h1>
+          <h4 class="is-size-4"><span style="color:crimson">Transactions on Machine Learning Research (TMLR) 2025</span></h4>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zhuoqun-chen.github.io">Zhuoqun Chen*</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/xiu-yuan-8b0650270">Xiu Yuan*</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://cseweb.ucsd.edu/~t3mu/">Tongzhou Mu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://cseweb.ucsd.edu/~haosu/">Hao Su</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>UC San Diego</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="./static/assets/rnrdp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2502.12724"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=<PLACEHOLDER>"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zhuoqun-chen/rnrdp"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/zhuoqun-chen/rnrdp/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="teaser-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-three-quarters">
+        <div class="media" style="display: flex; gap: 0; justify-content: center; align-items: flex-start;">
+          <div class="content has-text-centered" style="position: relative; width: 50%; margin: 0; padding: 0;">
+            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.5); color: #fff; padding: 0.3em 1em; border-radius: 0.5em; font-size: 1.1em; pointer-events: none; z-index: 2; min-width: 70%; max-width: 90%; white-space: nowrap;">
+              Diffusion Policy (DP)
+            </div>
+            <video id="relocate-dp-video" autoplay loop controls muted playsinline style="width: 100%; display: block;">
+              <source src="./static/assets/roll_dp.mp4" type="video/mp4">
+            </video>
+            <!-- ROI red box overlay -->
+            <div style="position: absolute; top: 26%; right: 16%; width: 12%; height: 12%; border: 3px solid red; border-radius: 0.3em; box-sizing: border-box; pointer-events: none; z-index: 3;"></div>
+          </div>
+          <div class="content has-text-centered" style="position: relative; width: 50%; margin: 0; padding: 0;">
+            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.5); color: #fff; padding: 0.3em 1em; border-radius: 0.5em; font-size: 1.1em; pointer-events: none; z-index: 2; min-width: 70%; max-width: 90%; white-space: nowrap;">
+              Ours (RNR-DP)
+            </div>
+            <video id="relocate-rnrdp-video" autoplay loop controls muted playsinline style="width: 100%; display: block;">
+              <source src="./static/assets/roll_rnrdp.mp4" type="video/mp4">
+            </video>
+            <!-- ROI red box overlay -->
+            <div style="position: absolute; top: 26%; right: 16%; width: 12%; height: 12%; border: 3px solid red; border-radius: 0.3em; box-sizing: border-box; pointer-events: none; z-index: 3;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Imitation learning is an efficient method for teaching robots a variety of tasks.
+            Diffusion Policy, which uses a conditional denoising diffusion process to generate actions, has demonstrated superior performance, particularly in learning from multi-modal demonstrates.
+            However, it relies on executing multiple actions predicted from the same inference step to retain performance and prevent mode bouncing, which limits its responsiveness, as actions are not conditioned on the most recent observations.
+          </p>
+          <p>
+            To address this, we introduce <span style="color: #4da2e4; font-weight: bold;">Responsive Noise-Relaying Diffusion Policy (RNR-DP)</span>, which maintains a noise-relaying buffer with progressively increasing noise levels and employs a sequential denoising mechanism that generates immediate,
+            noise-free actions at the head of the sequence, while appending noisy actions at the tail.
+            This ensures that actions are responsive and conditioned on the latest observations, while maintaining motion consistency through the noise-relaying buffer.
+            This design enables the handling of tasks requiring responsive control, and accelerates action generation by reusing denoising steps.
+          </p>
+          <p>
+            Experiments on response-sensitive tasks demonstrate that, compared to Diffusion Policy, ours achieves 18% improvement in success rate.
+            Further evaluation on regular tasks demonstrates that RNR-DP also exceeds the best acceleration method by 6.9% in success rate, highlighting its computational efficiency advantage in scenarios where responsiveness is less critical.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Method Overview. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            Below is a inference overview of our method. The core of RNR-DP is the noise-relaying buffer and it has 3 stages during the entire control-loop, as exemplified by the transition between time step t and time step t+1,
+            (1) The buffer contains noisy actions with increasing noise levels.
+            (2) After denoising once, each action in the buffer is denoised for one step, clean action at the buffer's head is removed and executed (<span style="color:#00A651; font-weight: bold;">dequeue</span>).
+            (3) The remaining noisy actions are left shifted for one slot and a fully noisy action is appended to the buffer's tail (<span style="color:#a82216; font-weight: bold;">enqueue</span>).
+          </p>
+          <img src="./static/assets/method_overview.png" alt="Method overview." class="method-overview"/>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Method Overview. -->
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Overall Improvement</h2>
+        <div class="content has-text-justified">
+          RNR-DP consistently outperforms Diffusion Policy across all tested scenarios in both state and visual experiments.
+          Specifically, in state experiments, RNR-DP achieves a 15.1% improvement over Diffusion Policy,
+          while in visual experiments, it demonstrates a 24.9% improvement. Overall, RNR-DP surpasses Diffusion Policy by 18.0%.
+          Notably, in the Relocate task, RNR-DP achieves a significant performance boost of 38.6% over Diffusion Policy.
+        </div>
+        <div class="content" style="display: flex; justify-content: center;">
+          <div style="margin-left: 4vw;">
+            <img src="./static/assets/bars.png" alt="overall improvement." width="60%"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">More Qualitative comparisons</h2>
+
+        <!-- Relocate -->
+        <h3 class="title is-4"><a href="https://robotics.farama.org/envs/adroit_hand/adroit_relocate/">Adroit: Relocate Task</a></h3>
+        <div class="media">
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Diffusion Policy (DP)</h4>
+            <video id="relocate-dp-video" autoplay="" loop controls muted playsinline width="75%">
+              <source src="./static/assets/relocate_dp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Ours (RNR-DP)</h4>
+            <video id="relocate-rnrdp-video" autoplay="" loop controls muted playsinline width="75%">
+              <source src="./static/assets/relocate_rnrdp.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            Relocating a ball on a desk to the goal region using a dexterous hand is particularly challenging due to the complex dynamics of hand-object interactions,
+            especially when relative displacement may occur during the grasping process.
+            A common failure case of Diffusion Policy is its inability to lift the ball off the table within the maximum episode time due to the ball slipping on the surface or shifting within the fingers.
+            In contrast, under the same initial conditions, our method not only successfully achieves a stable grasp but also smoothly transports the ball to the goal region with minimal delay,
+            demonstrating the advantages of RNR-DP.
+          </p>
+        </div>
+        <!--/ Relocate. -->
+
+        <!-- PushChair. -->
+        <h3 class="title is-4"><a href="https://sapien.ucsd.edu/challenges/maniskill/#tasks:~:text=Turn%20Faucet-,Push%20Chair,-Open%20Cabinet%20Door">ManiSkill2: PushChair Task</a></h3>
+        <div class="media">
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Diffusion Policy (DP)</h4>
+            <video id="pushchair-dp-video" autoplay="" loop controls muted playsinline width="75%">
+              <source src="./static/assets/push_dp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Ours (RNR-DP)</h4>
+            <video id="pushchair-rnrdp-video" autoplay="" loop controls muted playsinline width="75%">
+              <source src="./static/assets/push_rnrdp.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            When Diffusion Policy predicts a sequence of future actions at a given moment, it executes all predicted actions without adjustment.
+            However, if the predicted motion deviates significantly from the target point (red dot),
+            it lacks the ability to correct itself based on the latest observations, ultimately failing to push the chair to the target area.
+            In contrast, our method continuously updates decisions based on the most recent observations, ensuring high precision in guiding the chair toward the target and completing the task efficiently.
+          </p>
+        </div>
+        <!--/ PushChair. -->
+
+        <!-- PushT. -->
+        <h3 class="title is-4"><a href="https://maniskill.readthedocs.io/en/latest/tasks/table_top_gripper/#pusht-v1">ManiSkill3: PushT Task</a></h3>
+        <div class="media">
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Diffusion Policy (DP)</h4>
+            <video id="pusht-dp-video" autoplay="" loop controls muted playsinline width="75%">
+              <source src="./static/assets/pusht_dp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Ours (RNR-DP)</h4>
+            <video id="pusht-rnrdp-video" autoplay="" loop controls muted playsinline width="75%">
+              <source src="./static/assets/pusht_rnrdp.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            Pushing the T-shaped block precisely into the target region with a stick is particularly challenging,
+            as it requires fine control over both position and orientation to prevent unintended rotations or misalignments.
+            Due to its long action horizon, Diffusion Policy often introduces slight misalignments, causing the end-effector to oscillate near the edge in an attempt to correct the placement.
+            In contrast, our method, which employs single-action rollouts, accurately positions the object with precision, ensuring correct alignment.
+          </p>
+        </div>
+        <!--/ PushT. -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Our Policy Preserves Multi-modality</h2>
+        <div class="content" style="display: flex; justify-content: center;">
+          <div style="margin-left: 4vw;">
+            <img src="./static/assets/property_multi_modality.png" alt="overall improvement." width="40%"/>
+          </div>
+        </div>
+        <div class="content has-text-justified">
+          To demonstrate the preservation of multi-modality in practice, we visualize action distributions from a state in the ManiSkill2 StackCube task,using our RNR-DP.
+          We sample 1000 actions from our policy then applies PCA dimensionality reduction for visualization.
+          We use histograms to visualize the discrete relative density of these action samples and use kernel density estimation (KDE) to visualize the estimated probability density function.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <p>
+      If you find our work useful, please consider citing our paper as follows:
+    </p>
+    <pre><code>@article{chen2025rnrdp,
+  author    = {Chen, Zhuoqun and Yuan, Xiu and Mu, Tongzhou and Su, Hao},
+  title     = {Responsive Noise-Relaying Diffusion Policy: Responsive and Efficient Visuomotor Control},
+  journal   = {Transactions on Machine Learning Research (TMLR)},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p class="has-text-centered">
+            Website based on <a href="https://nerfies.github.io/">Nerfies</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
